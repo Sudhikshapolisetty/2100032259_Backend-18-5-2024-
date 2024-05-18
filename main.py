@@ -223,12 +223,12 @@ def query_6():
 # 7. Get the total number of orders and the total sales amount for each month in 2023.
 def query_7():
     try:
-        query = """select date_format(orderDate, '%%Y-%%m') AS month, count(o.orderid) AS total_orders, SUM(oi.quantity * p.price) AS total_sales
+        query = """select date_format(orderDate, "%y %m") AS month, count(o.orderid) AS total_orders, SUM(oi.quantity * p.price) AS total_sales
                     from orders o
                     join orderItem oi ON o.orderid = oi.orderid
                     join products p ON oi.productid = p.productid
                     where orderDate >= '2023-01-01' and orderDate < '2024-01-01'
-                    group by date_format(orderDate, '%%Y-%%m');"""
+                    group by date_format(orderDate, "%y %m");"""
 
         cursor.execute(query)
         results = cursor.fetchall()
